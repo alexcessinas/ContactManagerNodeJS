@@ -3,10 +3,8 @@ const { indexController } = require('../controllers/index-controller');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', indexController.functionTitle, () => {  
-});
+router.get('/', indexController.functionTitle);
 
-router.get('/create-contact', indexController.functionAddContact, () => {
-})
+router.get('/create-contact', indexController.functionAddContact);
 
 module.exports = router;

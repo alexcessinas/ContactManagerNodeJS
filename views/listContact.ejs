@@ -11,11 +11,11 @@
         <!-- Tableau dynamique plus qu'à le remplir avec les valeurs et faire foncitonnement
         des boutons "Modifier" et "Supprimer" et les liens vers la page de détails -->
         
-        <% for(var i = 1 ; i <= compteur ; i++) { %>
+        <% for(var i = 0 ; i < contacts.length ; i++) { %>
         <tr>
-            <td><button class="btn btn-link"><%= i %></button></td>
-            <td><button class="btn btn-link"><%= i %></button></td>
-            <td><button class="btn btn-link"><%= i %></button></td>
+            <td><button class="btn btn-link"><%= contacts[i].name %></button></td>
+            <td><button class="btn btn-link"><%= contacts[i].firstName %></button></td>
+            <td><button class="btn btn-link"><%= contacts[i].number %></button></td>
             <td>
                 <div class="btn-group">
                     <button class="btn ">Modifier
