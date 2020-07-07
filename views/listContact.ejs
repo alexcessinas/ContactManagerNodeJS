@@ -1,5 +1,30 @@
-<p>
-    <% for(var i = 1 ; i <= compteur ; i++) { %>
-    <%= i %>
-    <% } %>
- </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Numéro</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Tableau dynamique plus qu'à le remplir avec les valeurs et faire foncitonnement
+        des boutons "Modifier" et "Supprimer" et les liens vers la page de détails -->
+        
+        <% for(var i = 1 ; i <= compteur ; i++) { %>
+        <tr>
+            <td><button class="btn btn-link"><%= i %></button></td>
+            <td><button class="btn btn-link"><%= i %></button></td>
+            <td><button class="btn btn-link"><%= i %></button></td>
+            <td>
+                <div class="btn-group">
+                    <button class="btn ">Modifier
+                        <span class="glyphicon glyphicon-pencil"></span></button>
+                    <button class="btn btn-danger">Supprimer
+                        <span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>

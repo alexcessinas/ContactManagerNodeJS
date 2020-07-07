@@ -6,9 +6,7 @@ exports.indexController = {
   },
 
   functionAddContact(req, res, next) {
-    res.render('listContact', { compteur: 15 });
+    res.render("formContact", { title: "Contact Manager" });
     next();
   }
-
-
 }
