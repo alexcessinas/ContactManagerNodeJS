@@ -7,10 +7,7 @@
             <th class="text-center" scope="col"></th>
         </tr>
     </thead>
-    <tbody>
-        <!-- Tableau dynamique plus qu'à le faire foncitonnement
-        des boutons "Modifier" et "Supprimer" et les liens vers la page de détails -->
-        
+    <tbody>      
         <% for(var i = 0 ; i < contacts.length ; i++) { %>
         <tr>
             <td class="text-center"><a role="button" class="btn btn-link" href="/details-contact/<%= contacts[i].id %>"><%= contacts[i].name %></a></td>

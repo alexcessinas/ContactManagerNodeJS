@@ -1,4 +1,6 @@
 const { contactGroupService } = require("../services/contactGroupService");
+const { contactService } = require("../services/contactService");
+
 
 const title = "Contact Manager";
 
@@ -28,7 +30,7 @@ exports.contactGroupController = {
     contactGroupService
       .getContactGroupById(req.body)
       .then((result) => {
-        res.render("detailContactGroup", {
+        res.render("contactGroup/detailContactGroup", {
           title: title,
           contact: result,
         });
@@ -43,7 +45,10 @@ exports.contactGroupController = {
   },
 
   functionPageDeleteContactGroup(req, res, next) {
-    res.render("formContactGroup", { title: title });
+    res.render("formContactGroup", {
+      title: title,
+      
+    });
   },
 
   functionDeleteContactGroup(req, res, next) {

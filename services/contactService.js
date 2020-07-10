@@ -24,11 +24,11 @@ exports.contactService = {
 
   addContact(obj) {
     const query =
-      "INSERT INTO `contact` (id, name, firstName, number) VALUES(?, ?, ?, ?);";
+      "INSERT INTO `contact` (name, firstName, number) VALUES(?, ?, ?);";
     return new Promise((resolve, reject) => {
       connection.query(
         query,
-        [uuidv4(null, null, 0), obj.name, obj.firstName, obj.number],
+        [obj.name, obj.firstName, obj.number],
         (error, result, fields) => {
           if (error) reject(error);
           resolve(result);
@@ -45,7 +45,7 @@ exports.contactService = {
     return new Promise((resolve, reject) => {
       connection.query(
         query,
-        [obj.name, obj.firstName, obj.number, id],
+        [obj.name, obj.firstName, obj.number, obj.id],
         (error, result, fields) => {
           if (error) reject(error);
         }
