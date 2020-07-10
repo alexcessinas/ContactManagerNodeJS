@@ -1,8 +1,22 @@
 const { contactGroupService } = require("../services/contactGroupService");
 
+const title = "Contact Manager";
+
 exports.contactGroupController = {
+
+  functionListContactGroup(req, res, next) {
+    contactGroupService.getContactGroup().then(result => {
+      res.render("contactGroup/listContactGroup", {
+        title: "Contact Manager",
+        contactsGroup: result,
+      });
+    }).catch(err => {
+      throw new Error(err);
+    });
+  },
+
   functionPageAddContactGroup(req, res, next) {
-    res.render("formContactGroup", { title: "Contact Manager" });
+    res.render("contactGroup/formContactGroup", { title: title });
   },
 
   functionAddContactGroup(req, res, next) {
@@ -15,7 +29,7 @@ exports.contactGroupController = {
       .getContactGroupById(req.body)
       .then((result) => {
         res.render("detailContactGroup", {
-          title: "Contact Manager",
+          title: title,
           contact: result,
         });
       })
@@ -29,7 +43,7 @@ exports.contactGroupController = {
   },
 
   functionPageDeleteContactGroup(req, res, next) {
-    res.render("formContactGroup", { title: "Contact Manager" });
+    res.render("formContactGroup", { title: title });
   },
 
   functionDeleteContactGroup(req, res, next) {
@@ -44,7 +58,7 @@ exports.contactGroupController = {
 
   functionPageEditContactGroup(req, res, next) {
     res.render("formEditContactGroup", {
-      title: "Contact Manager",
+      title: title,
       // Mettre l'objet
       contact: {
         name: "obj.name",

@@ -1,0 +1,29 @@
+<% include ../layout/head %>
+<% include ../layout/menu %>
+<% include ../layout/script %>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center" scope="col">Nom</th>
+            <th class="text-center" scope="col">Liste des contacts</th>
+            <th class="text-center" scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(var i = 0 ; i < contactsGroup.length ; i++) { %>
+        <tr>
+            <td class="text-center"><a role="button" class="btn btn-link" href="/details-contact/<%= contactsGroup[i].id %>"><%= contactsGroup[i].name %></a></td>
+            <td class="text-center"><a role="button" class="btn btn-link" href="/details-contact/<%= contactsGroup[i].id %>"><%= contactsGroup[i].name %></a></td>
+            <td class="text-right" >
+                <div class="btn-group">
+                    <a class="btn btn-primary" role="button" href="/edit-contactGroup/<%= contactsGroup[i].id %>">Modifier
+                         <span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-danger" role="button" href="/delete-contactGroup/<%= contactsGroup[i].id %>">Supprimer
+                        <span class="glyphicon glyphicon-trash"></span></a>
+                </div>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>

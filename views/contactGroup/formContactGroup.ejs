@@ -1,0 +1,47 @@
+    <% include ../layout/head %>
+    <% include ../layout/menu %>
+    <% include ../layout/script %>
+    
+    <div class="container">
+    
+        <form class="well form-horizontal" action="" method="post" id="contact_form">
+            <fieldset>
+    
+                <!-- Text input-->
+    
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nom</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="name" placeholder="Name" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Text input-->
+    
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Liste des contacts</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="firstName" placeholder="FirstName" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4"><br>
+                        <button type="submit" class="btn btn-warning">Enregistrer
+                            <span class="glyphicon glyphicon-send"></span>
+                        </button>
+                    </div>
+                </div>
+    
+            </fieldset>
+        </form>
+    </div>
+    </div><!-- /.container -->

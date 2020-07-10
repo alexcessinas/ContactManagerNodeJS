@@ -37,13 +37,27 @@ exports.contactService = {
     });
   },
 
+  updateContact(obj, id) {
+    console.log(obj);
+    
+    const query =
+      "UPDATE `contact` SET name = ?, firstName = ?, number = ? WHERE id = ?;";
+    return new Promise((resolve, reject) => {
+      connection.query(
+        query,
+        [obj.name, obj.firstName, obj.number, id],
+        (error, result, fields) => {
+          if (error) reject(error);
+        }
+      );
+    });
+  },
+
   deleteContact(id) {
     const query = "DELETE FROM `contact` WHERE id=?;";
     return new Promise((reject) => {
       connection.query(query, id, (error, result, fields) => {
-        if (error) reject(error);
-        console.log(result);
-        
+        if (error) reject(error);        
       });
     });
   },

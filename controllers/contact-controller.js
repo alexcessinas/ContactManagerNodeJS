@@ -1,10 +1,12 @@
 const { contactService } = require("../services/contactService");
 
+const title = "Contact Manager";
+
 exports.contactController = {
   functionTitle(req, res, next) {
     contactService.getContact().then(result => {
       res.render("index", {
-        title: "Contact Manager",
+        title: title,
         contacts: result,
       });
     }).catch(err => {
@@ -13,7 +15,7 @@ exports.contactController = {
   },
 
   functionPageAddContact(req, res, next) {
-    res.render("formContact", { title: "Contact Manager"});
+    res.render("contact/formContact", { title: title});
   },
 
   functionAddContact(req, res, next) {
@@ -24,8 +26,8 @@ exports.contactController = {
   functionPageDetailsContact(req, res, next) {   
     contactService.getContactById(req.params.id)
       .then((result) => {        
-        res.render("detailContact", {
-          title: "Contact Manager",
+        res.render("contact/detailContact", {
+          title: title,
           contact: result,
         });
       })
@@ -39,16 +41,16 @@ exports.contactController = {
   },
 
   functionPageDeleteContact(req, res, next) {
-    res.render("deleteContact", { title: "Contact Manager"});
+    res.render("contact/deleteContact", { title: title });
   },
 
   functionDeleteContact(req, res, next) {
-    contactService.deleteContact(req.body);
+    contactService.deleteContact(req.params.id);
     res.redirect("/");
   },
 
   functionEditContact(req, res, next) {
-    // Insert method to save a contact
+    contactService.updateContact(req.body, req.params.id);
     res.redirect("/");
   },
 
@@ -56,8 +58,8 @@ exports.contactController = {
     contactService
       .getContactById(req.params.id)
       .then((result) => {
-        res.render("formEditContact", {
-          title: "Contact Manager",
+        res.render("contact/formEditContact", {
+          title: title,
           contact: result,
         });
       })
