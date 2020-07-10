@@ -2,9 +2,13 @@ const { contactService } = require("../services/contactService");
 
 exports.indexController = {
   functionTitle(req, res, next) {
-    res.render("index", {
-      title: "Contact Manager",
-      contacts: contactService.getContact(),
+    contactService.getContact().then(result => {
+      res.render("index", {
+        title: "Contact Manager",
+        contacts: result,
+      });
+    }).catch(err => {
+      throw new Error(err);
     });
   },
 
@@ -18,15 +22,16 @@ exports.indexController = {
   },
 
   functionPageDetailsContact(req, res, next) {
-    res.render("detailContact", {
-      title: "Contact Manager",
-      // Mettre l'objet
-      contact: {
-        name: "obj.name",
-        firstName: "obj.firstName",
-        number: "obj.number",
-      },
-    });
+    contactService.getContactById(1)
+      .then((result) => {
+        res.render("detailContact", {
+          title: "Contact Manager",
+          contact: result,
+        });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   },
 
   functionDetailsContact(req, res, next) {

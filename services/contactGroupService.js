@@ -1,9 +1,8 @@
 const { v4: uuidv4 } = require('uuid');
 const connection = require("../db/db");
 
-exports.contactService = {
-
-  getContact() {
+exports.contactGroupService = {
+  getContactGroup() {
     return new Promise((resolve, reject) => {
       connection.query("SELECT * from `contact`;", (error, result, fields) => {
         if (error) reject(error);
@@ -12,7 +11,7 @@ exports.contactService = {
     });
   },
 
-  getContactById(id) {
+  getContactGroupById(id) {
     const query = "SELECT * FROM `contact` WHERE id = ?;";
     return new Promise((resolve, reject) => {
       connection.query(query, id, (error, result, fields) => {
@@ -22,7 +21,7 @@ exports.contactService = {
     });
   },
 
-  addContact(obj) {
+  addContactGroup(obj) {
     const query =
       "INSERT INTO `contact` (id, name, firstName, number) VALUES(?, ?, ?, ?);";
     return new Promise((resolve, reject) => {
@@ -37,7 +36,7 @@ exports.contactService = {
     });
   },
 
-  deleteContact(id) {
+  deleteContactGroup(id) {
     const query = "DELETE FROM `contact` WHERE id=?;";
     return new Promise((resolve, reject) => {
       connection.query(query, id, (error, result, fields) => {
