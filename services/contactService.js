@@ -1,4 +1,3 @@
-const { v4: uuidv4 } = require('uuid');
 const connection = require("../db/db");
 
 exports.contactService = {
@@ -38,14 +37,12 @@ exports.contactService = {
   },
 
   updateContact(obj, id) {
-    console.log(obj);
-    
     const query =
       "UPDATE `contact` SET name = ?, firstName = ?, number = ? WHERE id = ?;";
     return new Promise((resolve, reject) => {
       connection.query(
         query,
-        [obj.name, obj.firstName, obj.number, obj.id],
+        [obj.name, obj.firstName, obj.number, id],
         (error, result, fields) => {
           if (error) reject(error);
         }
