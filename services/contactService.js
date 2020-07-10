@@ -17,7 +17,7 @@ exports.contactService = {
     return new Promise((resolve, reject) => {
       connection.query(query, id, (error, result, fields) => {
         if (error) reject(error);
-        resolve(result);
+        resolve(result[0]);
       });
     });
   },
@@ -39,10 +39,11 @@ exports.contactService = {
 
   deleteContact(id) {
     const query = "DELETE FROM `contact` WHERE id=?;";
-    return new Promise((resolve, reject) => {
+    return new Promise((reject) => {
       connection.query(query, id, (error, result, fields) => {
         if (error) reject(error);
-        resolve(result);
+        console.log(result);
+        
       });
     });
   },

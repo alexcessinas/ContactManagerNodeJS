@@ -1,6 +1,6 @@
 const { contactService } = require("../services/contactService");
 
-exports.indexController = {
+exports.contactController = {
   functionTitle(req, res, next) {
     contactService.getContact().then(result => {
       res.render("index", {
@@ -13,7 +13,7 @@ exports.indexController = {
   },
 
   functionPageAddContact(req, res, next) {
-    res.render("formContact", { title: "Contact Manager" });
+    res.render("formContact", { title: "Contact Manager"});
   },
 
   functionAddContact(req, res, next) {
@@ -21,9 +21,9 @@ exports.indexController = {
     res.redirect("/");
   },
 
-  functionPageDetailsContact(req, res, next) {
-    contactService.getContactById(1)
-      .then((result) => {
+  functionPageDetailsContact(req, res, next) {   
+    contactService.getContactById(req.params.id)
+      .then((result) => {        
         res.render("detailContact", {
           title: "Contact Manager",
           contact: result,
@@ -39,7 +39,7 @@ exports.indexController = {
   },
 
   functionPageDeleteContact(req, res, next) {
-    res.render("formContact", { title: "Contact Manager" });
+    res.render("deleteContact", { title: "Contact Manager"});
   },
 
   functionDeleteContact(req, res, next) {
@@ -53,14 +53,16 @@ exports.indexController = {
   },
 
   functionPageEditContact(req, res, next) {
-    res.render("formEditContact", {
-      title: "Contact Manager",
-      // Mettre l'objet
-      contact: {
-        name: "obj.name",
-        firstName: "obj.firstName",
-        number: "obj.number",
-      },
-    });
+    contactService
+      .getContactById(req.params.id)
+      .then((result) => {
+        res.render("formEditContact", {
+          title: "Contact Manager",
+          contact: result,
+        });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   },
 };

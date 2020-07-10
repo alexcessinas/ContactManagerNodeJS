@@ -2,9 +2,6 @@
 <% include layout/menu %>
 <% include layout/script %>
 
-<script type="text/javascript">
-  
-</script>
 <div class="container">
 
     <form class="well form-horizontal" action="" method="post" id="contact_form">
@@ -17,7 +14,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="name" placeholder="<% contact.name %>" class="form-control" type="text" >
+                        <input name="name" class="form-control" type="text" value= "<%= contact.name %>">
                     </div>
                 </div>
             </div>
@@ -29,7 +26,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="firstName" placeholder="<% contact.firstName %>" class="form-control" type="text">
+                        <input name="firstName" class="form-control" type="text" value= "<%= contact.firstName %>">
                     </div>
                 </div>
             </div>
@@ -41,7 +38,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                        <input name="number" placeholder="<% contact.number %>" class="form-control" type="text">
+                        <input name="number" class="form-control" type="text" value= "<%= contact.number%>">
                     </div>
                 </div>
             </div>

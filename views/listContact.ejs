@@ -1,8 +1,3 @@
-<script type="text/javascript">
-    function deleteClick() {
-    }
-</script>
-
 <table class="table">
     <thead>
         <tr>
@@ -18,15 +13,15 @@
         
         <% for(var i = 0 ; i < contacts.length ; i++) { %>
         <tr>
-            <td class="text-center"><button class="btn btn-link"><%= contacts[i].name %></button></td>
-            <td class="text-center"><button class="btn btn-link"><%= contacts[i].firstName %></button></td>
-            <td class="text-center"><button class="btn btn-link"><%= contacts[i].number %></button></td>
+            <td class="text-center"><a role="button" class="btn btn-link" href="/details-contact/<%= contacts[i].id %>"><%= contacts[i].name %></a></td>
+            <td class="text-center"><a role="button" class="btn btn-link" href="/details-contact/<%= contacts[i].id %>"><%= contacts[i].firstName %></a></td>
+            <td class="text-center"><a role="button" class="btn btn-link" href="/details-contact/<%= contacts[i].id %>"><%= contacts[i].number %></a></td>
             <td class="text-right" >
                 <div class="btn-group">
-                    <button class="btn">Modifier
-                        <span class="glyphicon glyphicon-pencil"></span></button>
-                    <button id="btn-delete" class="btn btn-danger" onclick="deleteClick()">Supprimer
-                        <span class="glyphicon glyphicon-trash"></span></button>
+                    <a class="btn btn-primary" role="button" href="/edit-contact/<%= contacts[i].id %>">Modifier
+                         <span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-danger" role="button" href="/delete-contact/<%= contacts[i].id %>">Supprimer
+                        <span class="glyphicon glyphicon-trash"></span></a>
                 </div>
             </td>
         </tr>

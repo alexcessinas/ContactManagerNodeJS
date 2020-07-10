@@ -4,7 +4,7 @@ const connection = require("../db/db");
 exports.contactGroupService = {
   getContactGroup() {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * from `contact`;", (error, result, fields) => {
+      connection.query("SELECT * from `group_contact`;", (error, result, fields) => {
         if (error) reject(error);
         resolve(result);
       });
@@ -12,7 +12,7 @@ exports.contactGroupService = {
   },
 
   getContactGroupById(id) {
-    const query = "SELECT * FROM `contact` WHERE id = ?;";
+    const query = "SELECT * FROM `group_contact` WHERE id = ?;";
     return new Promise((resolve, reject) => {
       connection.query(query, id, (error, result, fields) => {
         if (error) reject(error);
@@ -23,11 +23,11 @@ exports.contactGroupService = {
 
   addContactGroup(obj) {
     const query =
-      "INSERT INTO `contact` (id, name, firstName, number) VALUES(?, ?, ?, ?);";
+      "INSERT INTO `group_contact` (id, name, id_contact) VALUES(?, ?, ?, ?);";
     return new Promise((resolve, reject) => {
       connection.query(
         query,
-        [uuidv4(null, null, 0), obj.name, obj.firstName, obj.number],
+        [uuidv4(null, null, 0), obj.name, obj.id_contact],
         (error, result, fields) => {
           if (error) reject(error);
           resolve(result);
@@ -37,7 +37,7 @@ exports.contactGroupService = {
   },
 
   deleteContactGroup(id) {
-    const query = "DELETE FROM `contact` WHERE id=?;";
+    const query = "DELETE FROM `group_contact` WHERE id=?;";
     return new Promise((resolve, reject) => {
       connection.query(query, id, (error, result, fields) => {
         if (error) reject(error);

@@ -1,22 +1,22 @@
 var express = require('express');
-const { indexController } = require("../controllers/index-controller");
+const { contactController } = require("../controllers/contact-controller");
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', indexController.functionTitle);
+router.get('/', contactController.functionTitle);
 
 /* Get formulaire de création d'un contact */
-router.get('/create-contact', indexController.functionPageAddContact);
+router.get('/create-contact', contactController.functionPageAddContact);
 /* Post pour sauvegarder les données du formulaire */
-router.post("/create-contact", indexController.functionAddContact);
+router.post("/create-contact", contactController.functionAddContact);
 
-router.get("/delete-contact/:id", indexController.functionPageDeleteContact);
-router.post("/delete-contact/:id", indexController.functionDeleteContact);
+router.get("/delete-contact/:id", contactController.functionPageDeleteContact);
+router.post("/delete-contact/:id", contactController.functionDeleteContact);
 
-router.get("/details-contact/:id", indexController.functionPageDetailsContact);
-router.post("/details-contact/:id", indexController.functionDetailsContact);
+router.get("/details-contact/:id", contactController.functionPageDetailsContact);
+router.post("/details-contact/:id", contactController.functionDetailsContact);
 
-router.get("/edit-contact/:id", indexController.functionPageEditContact);
-router.post("/edit-contact/:id", indexController.functionEditContact);
+router.get("/edit-contact/:id", contactController.functionPageEditContact);
+router.post("/edit-contact/:id", contactController.functionEditContact);
 
 module.exports = router;
