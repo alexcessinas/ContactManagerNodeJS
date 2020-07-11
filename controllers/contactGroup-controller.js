@@ -7,9 +7,9 @@ const title = "Contact Manager";
 exports.contactGroupController = {
 
   functionListContactGroup(req, res, next) {
-    contactGroupService.getContactGroup().then(result => {
+    contactGroupService.getGroup().then(result => {
       res.render("contactGroup/listContactGroup", {
-        title: "Contact Manager",
+        title: title,
         contactsGroup: result,
       });
     }).catch(err => {
@@ -18,21 +18,32 @@ exports.contactGroupController = {
   },
 
   functionPageAddContactGroup(req, res, next) {
-    res.render("contactGroup/formContactGroup", { title: title });
+    contactService.getContact().then((result) => {
+      res.render("contactGroup/formContactGroup", {
+         title: title,
+          contacts: result
+         });
+    })
+    
   },
 
-  functionAddContactGroup(req, res, next) {
-    contactGroupService.addContactGroup(req.body);
-    res.redirect("/");
+  functionAddContactGroup(req, res, next) {  
+    const idContact = req.body.idContact;
+    const nameGroup = req.body.name;
+    contactGroupService.addGroup(nameGroup).then((result) => {    
+      const idGroup = result.insertId;
+      const promiseArray = idContact.map((id) => contactGroupService.saveContact(idGroup, id))
+      Promise.all(promiseArray).then((result => res.redirect("/list-contactGroup")));
+    })
   },
 
   functionPageDetailsContactGroup(req, res, next) {
     contactGroupService
-      .getContactGroupById(req.body)
-      .then((result) => {
+      .getGroupById(req.params.id)
+      .then((result) => {        
         res.render("contactGroup/detailContactGroup", {
           title: title,
-          contact: result,
+          contactGroup: result,
         });
       })
       .catch((err) => {
@@ -41,35 +52,34 @@ exports.contactGroupController = {
   },
 
   functionDetailsContactGroup(req, res, next) {
-    res.redirect("/");
+    res.redirect("/list-contactGroup");
   },
 
   functionPageDeleteContactGroup(req, res, next) {
-    res.render("formContactGroup", {
-      title: title,
-      
-    });
+    res.render("contactGroup/deleteContactGroup", { title: title });
   },
 
   functionDeleteContactGroup(req, res, next) {
-    contactGroupService.deleteContactGroup(req.body);
-    res.redirect("/");
+    contactGroupService.deleteGroup(req.params.id);
+    res.redirect("/list-contactGroup");
   },
 
   functionEditContactGroup(req, res, next) {
-    // Insert method to save a contact
-    res.redirect("/");
+    contactGroupService.updateGroup(req.body, req.params.id);
+    res.redirect("/list-contactGroup");
   },
 
   functionPageEditContactGroup(req, res, next) {
-    res.render("formEditContactGroup", {
-      title: title,
-      // Mettre l'objet
-      contact: {
-        name: "obj.name",
-        firstName: "obj.firstName",
-        number: "obj.number",
-      },
-    });
+    contactGroupService
+      .getGroupById(req.params.id)
+      .then((result) => {        
+        res.render("contactGroup/formEditContactGroup", {
+          title: title,
+          contactGroup: result[0],
+        });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   },
 };
