@@ -22,7 +22,11 @@
                     <div class="col-md-4 inputGroupContainer">
                         <div class="imput-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            
+                            <select name="idContact" multiple class="form-control" id="exampleFormControlSelect2">
+                                <% for(var i = 0 ; i < contacts.length ; i++) { %>
+                                <option value="<%= contacts[i].id %>"><%= contacts[i].name %></option>
+                                <% } %>
+                            </select>
                         </div>
                     </div>
                 </div>

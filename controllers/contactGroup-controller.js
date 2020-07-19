@@ -40,10 +40,16 @@ exports.contactGroupController = {
   functionPageDetailsContactGroup(req, res, next) {
     contactGroupService
       .getGroupById(req.params.id)
-      .then((result) => {        
-        res.render("contactGroup/detailContactGroup", {
-          title: title,
-          contactGroup: result,
+      .then((group) => {
+        const idGroup = group[0].id;
+        contactGroupService.getContactByGroupId(idGroup).then(result => {
+          res.render("contactGroup/detailContactGroup", {
+            title: title,
+            contactGroup: group[0],
+            contacts: result
+          });
+        }).catch ((err) => {
+          throw new Error(err);
         });
       })
       .catch((err) => {
@@ -66,16 +72,23 @@ exports.contactGroupController = {
 
   functionEditContactGroup(req, res, next) {
     contactGroupService.updateGroup(req.body, req.params.id);
+    console.log(req.body);
     res.redirect("/list-contactGroup");
   },
 
   functionPageEditContactGroup(req, res, next) {
     contactGroupService
       .getGroupById(req.params.id)
-      .then((result) => {        
-        res.render("contactGroup/formEditContactGroup", {
-          title: title,
-          contactGroup: result[0],
+      .then((group) => {
+        const idGroup = group[0].id;
+        contactGroupService.getContactByGroupId(idGroup).then(result => {
+          res.render("contactGroup/formEditContactGroup", {
+            title: title,
+            contactGroup: group[0],
+            contacts: result
+          });
+        }).catch((err) => {
+          throw new Error(err);
         });
       })
       .catch((err) => {

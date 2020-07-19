@@ -38,7 +38,7 @@ exports.contactGroupService = {
 
   saveContact(idGroup, idContact) {
     const query =
-      "INSERT INTO contactgroup(contact, `group`) VALUES(?, ?);";
+      "INSERT INTO contactgroup(contact_id, `group_id`) VALUES(?, ?);";
     return new Promise((resolve, reject) => {
       connection.query(
         query,
@@ -67,7 +67,6 @@ exports.contactGroupService = {
 
 
   deleteGroup(id) {
-    console.log(id);
     const query = "DELETE FROM `group` WHERE id=?;";
     return new Promise((resolve, reject) => {
       connection.query(query, id, (error, result, fields) => {
@@ -76,4 +75,16 @@ exports.contactGroupService = {
       });
     });
   },
+
+  getContactByGroupId(id){
+    const query = 
+    "SELECT * from contact INNER JOIN contactgroup ON contact.id = contactgroup.contact_id WHERE contactgroup.group_id = ?;"
+    return new Promise((resolve, reject) => {
+      connection.query(query, id, (error, result, fields) => {
+        if (error) reject(error);
+        resolve(result);
+      });
+    });
+  }
+
 };
